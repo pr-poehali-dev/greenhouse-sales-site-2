@@ -5,127 +5,134 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { Slider } from '@/components/ui/slider';
+
 import Icon from '@/components/ui/icon';
 
 interface Greenhouse {
   id: number;
   name: string;
   price: number;
-  width: number;
-  length: number;
-  height: number;
-  material: string;
+  category: string;
+  arches: string;
+  coating: string;
+  archDistance: string;
+  maxLoad: string;
+  dimensions: string;
+  baseLength: string;
+  extension: string;
+  baseKit: string;
   image: string;
-  features: string[];
   popular?: boolean;
 }
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
-  const [sizeFilter, setSizeFilter] = useState([0, 50]);
-  const [heightFilter, setHeightFilter] = useState([0, 4]);
 
   const greenhouses: Greenhouse[] = [
     {
       id: 1,
-      name: 'Стандарт 3x6',
-      price: 35000,
-      width: 3,
-      length: 6,
-      height: 2.1,
-      material: 'Поликарбонат 4мм',
+      name: 'Урожайная',
+      price: 0,
+      category: 'Усиленная арочная',
+      arches: 'Одинарные монолитные из трубы 25х25х0,8мм по ТУ 14-105-568-93',
+      coating: 'Цинковое покрытие 140гр/м² с оцинкованным сварочным швом',
+      archDistance: '100см (Псковитянка 100) / 65см (Псковитянка 65)',
+      maxLoad: '200кг (Псковитянка 100) / 320кг (Псковитянка 65)',
+      dimensions: '3м/2,1м; 2,5м/2,25м',
+      baseLength: '4 метра',
+      extension: 'Добор с шагом 2 метра',
+      baseKit: '2 торца с дверьми и форточками, 5 рядов направляющих, дуги: 3 при шаге 100см, 5 при шаге 65см',
       image: 'https://cdn.poehali.dev/projects/7f2b7179-9fec-4144-acd7-b01c04fb874c/files/8313a570-8217-42fc-bf80-ed6c2be7a79d.jpg',
-      features: ['Оцинкованный каркас', 'UV-защита', 'Гарантия 5 лет'],
       popular: true
     },
     {
       id: 2,
-      name: 'Профи 3x8',
-      price: 48000,
-      width: 3,
-      length: 8,
-      height: 2.3,
-      material: 'Поликарбонат 6мм',
+      name: 'Волжанка',
+      price: 0,
+      category: 'Усиленная арочная',
+      arches: 'Одинарные монолитные из трубы 40х20х0,7мм по ТУ 14-105-568-93',
+      coating: 'Цинковое покрытие 140гр/м² с оцинкованным сварочным швом',
+      archDistance: '100см (Волжанка 100) / 65см (Волжанка 65)',
+      maxLoad: '270кг (Волжанка 100) / 420кг (Волжанка 65)',
+      dimensions: '3м/2,1м',
+      baseLength: '4 метра',
+      extension: 'Добор с шагом 2 метра',
+      baseKit: '2 торца с дверьми и форточками, 5 рядов направляющих, дуги: 3 при шаге 100см, 5 при шаге 65см',
       image: 'https://cdn.poehali.dev/projects/7f2b7179-9fec-4144-acd7-b01c04fb874c/files/8313a570-8217-42fc-bf80-ed6c2be7a79d.jpg',
-      features: ['Усиленный каркас', 'Автопроветривание', 'Гарантия 7 лет'],
       popular: true
     },
     {
       id: 3,
-      name: 'Мини 2x4',
-      price: 22000,
-      width: 2,
-      length: 4,
-      height: 1.9,
-      material: 'Поликарбонат 4мм',
-      image: 'https://cdn.poehali.dev/projects/7f2b7179-9fec-4144-acd7-b01c04fb874c/files/8313a570-8217-42fc-bf80-ed6c2be7a79d.jpg',
-      features: ['Компактная', 'Легкая установка', 'Гарантия 3 года']
+      name: 'Стрелка',
+      price: 0,
+      category: 'Каплевидная',
+      arches: 'Цельносварные из трубы 25х25х0,8 мм по ТУ 14-105-568-93',
+      coating: 'Цинковое покрытие 140гр/м² с оцинкованным сварочным швом',
+      archDistance: '100 см (Стрелка 100) / 65 см (Стрелка 65)',
+      maxLoad: '—',
+      dimensions: '3 м/2,20 м',
+      baseLength: '4 метра',
+      extension: 'Доборы с шагом 2 и 1 метр',
+      baseKit: '2 торца, 3 дуги, 4 ряда направляющих, 2 ряда оснований, 2 двери, 2 форточки, конёк на крышу',
+      image: 'https://cdn.poehali.dev/projects/7f2b7179-9fec-4144-acd7-b01c04fb874c/files/8313a570-8217-42fc-bf80-ed6c2be7a79d.jpg'
     },
     {
       id: 4,
-      name: 'Макси 4x10',
-      price: 68000,
-      width: 4,
-      length: 10,
-      height: 2.5,
-      material: 'Поликарбонат 8мм',
-      image: 'https://cdn.poehali.dev/projects/7f2b7179-9fec-4144-acd7-b01c04fb874c/files/8313a570-8217-42fc-bf80-ed6c2be7a79d.jpg',
-      features: ['Максимальная прочность', 'Система полива', 'Гарантия 10 лет']
+      name: 'Домик',
+      price: 0,
+      category: 'Усиленная прямостенная',
+      arches: 'Одинарные, монолитные, из трубы 40х20х0,7мм по ТУ 14-105-568-93',
+      coating: 'Цинковое покрытие 140гр/м² с оцинкованным сварочным швом',
+      archDistance: '100см (Домик 100)',
+      maxLoad: '550кг (Домик 100)',
+      dimensions: '3м/2,2м',
+      baseLength: '4 метра',
+      extension: 'Добор с шагом 2 метра',
+      baseKit: '2 торца с дверьми и форточками, 6 рядов направляющих, дуги: 3 при шаге 100см, 5 при шаге 65см',
+      image: 'https://cdn.poehali.dev/projects/7f2b7179-9fec-4144-acd7-b01c04fb874c/files/8313a570-8217-42fc-bf80-ed6c2be7a79d.jpg'
     },
     {
       id: 5,
-      name: 'Эконом 3x4',
-      price: 28000,
-      width: 3,
-      length: 4,
-      height: 2.0,
-      material: 'Поликарбонат 4мм',
-      image: 'https://cdn.poehali.dev/projects/7f2b7179-9fec-4144-acd7-b01c04fb874c/files/8313a570-8217-42fc-bf80-ed6c2be7a79d.jpg',
-      features: ['Доступная цена', 'Простая сборка', 'Гарантия 3 года']
-    },
-    {
-      id: 6,
-      name: 'Арочная 3x6',
-      price: 42000,
-      width: 3,
-      length: 6,
-      height: 2.2,
-      material: 'Поликарбонат 6мм',
-      image: 'https://cdn.poehali.dev/projects/7f2b7179-9fec-4144-acd7-b01c04fb874c/files/8313a570-8217-42fc-bf80-ed6c2be7a79d.jpg',
-      features: ['Арочная форма', 'Снегоустойчивая', 'Гарантия 5 лет']
+      name: 'Кремлёвская Сказка',
+      price: 0,
+      category: 'Сверхусиленная прямостенная',
+      arches: 'Двойные разъемные из трубы 20х20х0,8мм по ТУ 14-105-568-93 с 20 силовыми соединителями',
+      coating: 'Цинковое покрытие 140гр/м² с оцинкованным сварочным швом',
+      archDistance: '100см (Сказка 100) / 65см (Сказка 65)',
+      maxLoad: '580кг (Сказка 100) / 870кг (Сказка 65)',
+      dimensions: '2,7м/2,0м',
+      baseLength: '4 метра',
+      extension: 'Добор с шагом 2 метра',
+      baseKit: '2 торца с дверьми, 7 рядов перемычек со спайдерным соединением, 3 дуги при шаге 100см, 5 дуг при шаге 65см',
+      image: 'https://cdn.poehali.dev/projects/7f2b7179-9fec-4144-acd7-b01c04fb874c/files/8313a570-8217-42fc-bf80-ed6c2be7a79d.jpg'
     }
   ];
 
   const reviews = [
     {
       id: 1,
-      name: 'Мария Иванова',
+      name: 'Анна Петрова',
       rating: 5,
-      text: 'Отличная теплица! Урожай томатов вырос в 2 раза. Установили за 3 часа, качество на высоте.',
-      date: '15 ноября 2024'
+      text: 'Купили теплицу Урожайная в прошлом году. Качество отличное, каркас крепкий. Помидоры и огурцы росли до самой осени!',
+      date: 'Ноябрь 2024'
     },
     {
       id: 2,
-      name: 'Сергей Петров',
+      name: 'Владимир Николаев',
       rating: 5,
-      text: 'Третий год пользуемся. Зимует отлично, поликарбонат не мутнеет. Рекомендую!',
-      date: '8 ноября 2024'
+      text: 'Заказывали Кремлёвскую Сказку. Доставили быстро, помогли разгрузить. Отличный поликарбонат, прозрачный и прочный.',
+      date: 'Октябрь 2024'
     },
     {
       id: 3,
-      name: 'Елена Смирнова',
-      rating: 4,
-      text: 'Хорошая теплица за свои деньги. Единственное - хотелось бы больше форточек для проветривания.',
-      date: '2 ноября 2024'
+      name: 'Татьяна Васильева',
+      rating: 5,
+      text: 'Магазин в Саранске на Рабочей — всё объяснили, помогли выбрать. Теплица служит уже 3 года без проблем!',
+      date: 'Сентябрь 2024'
     }
   ];
 
-  const filteredGreenhouses = greenhouses.filter(gh => {
-    const area = gh.width * gh.length;
-    return area >= sizeFilter[0] && area <= sizeFilter[1] && 
-           gh.height >= heightFilter[0] && gh.height <= heightFilter[1];
-  });
+  const filteredGreenhouses = greenhouses;
 
   const scrollToSection = (section: string) => {
     setActiveSection(section);
@@ -138,9 +145,13 @@ const Index = () => {
       <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b shadow-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Icon name="Sprout" className="text-primary" size={32} />
-              <h1 className="text-2xl font-bold text-primary">ТеплицаПро</h1>
+            <div className="flex items-center gap-3">
+              <img 
+                src="https://cdn.poehali.dev/projects/7f2b7179-9fec-4144-acd7-b01c04fb874c/files/c2ffd321-78cb-4843-a8b7-4daf2109ebee.jpg" 
+                alt="Логотип" 
+                className="h-10 w-10 object-contain"
+              />
+              <h1 className="text-xl font-bold text-primary">Поликарбонат&теплицы</h1>
             </div>
             <div className="hidden md:flex gap-6">
               {['home', 'catalog', 'reviews', 'delivery', 'contacts'].map((section) => (
@@ -176,8 +187,7 @@ const Index = () => {
                 Теплицы для богатого урожая
               </h2>
               <p className="text-xl text-gray-700 mb-8 leading-relaxed">
-                Качественные теплицы из поликарбоната с гарантией до 10 лет. 
-                Увеличьте урожай в 3 раза с нашими современными решениями!
+                Магазин в Саранске. Более 10 лет помогаем садоводам и фермерам Мордовии выращивать здоровые и обильные урожаи.
               </p>
               <div className="flex gap-4 flex-wrap">
                 <Button 
@@ -257,40 +267,7 @@ const Index = () => {
             <p className="text-gray-600 text-lg">Выберите идеальную теплицу для вашего участка</p>
           </div>
 
-          <Card className="mb-8 bg-white/80 backdrop-blur">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Icon name="Filter" size={24} />
-                Фильтры
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div>
-                <Label className="mb-3 block">
-                  Площадь: {sizeFilter[0]}-{sizeFilter[1]} м²
-                </Label>
-                <Slider
-                  value={sizeFilter}
-                  onValueChange={setSizeFilter}
-                  max={50}
-                  step={5}
-                  className="mb-2"
-                />
-              </div>
-              <div>
-                <Label className="mb-3 block">
-                  Высота: {heightFilter[0]}-{heightFilter[1]} м
-                </Label>
-                <Slider
-                  value={heightFilter}
-                  onValueChange={setHeightFilter}
-                  max={4}
-                  step={0.1}
-                  className="mb-2"
-                />
-              </div>
-            </CardContent>
-          </Card>
+
 
           <div className="grid md:grid-cols-3 gap-8">
             {filteredGreenhouses.map((gh, index) => (
@@ -310,61 +287,56 @@ const Index = () => {
                   className="w-full h-48 object-cover"
                 />
                 <CardHeader>
-                  <CardTitle className="flex items-center justify-between">
-                    {gh.name}
-                    <Badge variant="outline" className="font-normal">
-                      {gh.width}x{gh.length} м
-                    </Badge>
-                  </CardTitle>
-                  <CardDescription>{gh.material}</CardDescription>
+                  <CardTitle>{gh.name}</CardTitle>
+                  <CardDescription className="text-sm font-semibold">{gh.category}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-2 text-sm text-gray-600">
-                      <Icon name="Maximize2" size={16} />
-                      Высота: {gh.height} м
+                  <div className="space-y-2 text-sm">
+                    <div>
+                      <span className="font-semibold">Дуги:</span>
+                      <p className="text-gray-600">{gh.arches}</p>
                     </div>
-                    <div className="space-y-1">
-                      {gh.features.map((feature, i) => (
-                        <div key={i} className="flex items-center gap-2 text-sm">
-                          <Icon name="Check" size={16} className="text-primary" />
-                          {feature}
-                        </div>
-                      ))}
+                    <div>
+                      <span className="font-semibold">Покрытие:</span>
+                      <p className="text-gray-600">{gh.coating}</p>
+                    </div>
+                    <div>
+                      <span className="font-semibold">Расст. между дугами:</span>
+                      <p className="text-gray-600">{gh.archDistance}</p>
+                    </div>
+                    <div>
+                      <span className="font-semibold">Макс. нагрузка:</span>
+                      <p className="text-gray-600">{gh.maxLoad}</p>
+                    </div>
+                    <div>
+                      <span className="font-semibold">Ширина/Высота:</span>
+                      <p className="text-gray-600">{gh.dimensions}</p>
+                    </div>
+                    <div>
+                      <span className="font-semibold">Базовая длина:</span>
+                      <p className="text-gray-600">{gh.baseLength}</p>
+                    </div>
+                    <div>
+                      <span className="font-semibold">Удлинение:</span>
+                      <p className="text-gray-600">{gh.extension}</p>
+                    </div>
+                    <div>
+                      <span className="font-semibold">Компл. База:</span>
+                      <p className="text-gray-600">{gh.baseKit}</p>
                     </div>
                   </div>
                 </CardContent>
-                <CardFooter className="flex items-center justify-between">
-                  <div>
-                    <div className="text-3xl font-bold text-primary">
-                      {gh.price.toLocaleString()} ₽
-                    </div>
-                  </div>
-                  <Button className="bg-secondary hover:bg-secondary/90">
-                    <Icon name="ShoppingCart" size={18} className="mr-2" />
-                    Заказать
+                <CardFooter>
+                  <Button className="w-full bg-secondary hover:bg-secondary/90">
+                    <Icon name="Phone" size={18} className="mr-2" />
+                    Узнать цену
                   </Button>
                 </CardFooter>
               </Card>
             ))}
           </div>
 
-          {filteredGreenhouses.length === 0 && (
-            <div className="text-center py-12">
-              <Icon name="Search" size={48} className="mx-auto text-gray-400 mb-4" />
-              <p className="text-gray-600 text-lg">Теплицы с такими параметрами не найдены</p>
-              <Button 
-                variant="outline" 
-                className="mt-4"
-                onClick={() => {
-                  setSizeFilter([0, 50]);
-                  setHeightFilter([0, 4]);
-                }}
-              >
-                Сбросить фильтры
-              </Button>
-            </div>
-          )}
+
         </div>
       </section>
 
@@ -401,58 +373,82 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h3 className="text-4xl font-bold mb-4">Доставка и установка</h3>
-              <p className="text-gray-600 text-lg">Работаем по всей России</p>
+              <h3 className="text-4xl font-bold mb-4">Доставка и оплата</h3>
+              <p className="text-gray-600 text-lg">Доставим вашу теплицу быстро и в сохранности</p>
             </div>
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-3 gap-6 mb-12">
               <Card className="hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <Icon name="MapPin" size={32} className="text-primary mb-2" />
-                  <CardTitle>Зона доставки</CardTitle>
+                  <CardTitle>Доставка по Саранску</CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-3">
-                  <div className="flex items-start gap-2">
-                    <Icon name="Check" size={20} className="text-primary mt-0.5" />
-                    <div>
-                      <strong>Москва и МО:</strong> Бесплатная доставка
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <Icon name="Check" size={20} className="text-primary mt-0.5" />
-                    <div>
-                      <strong>До 200 км:</strong> 30 ₽/км
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <Icon name="Check" size={20} className="text-primary mt-0.5" />
-                    <div>
-                      <strong>По России:</strong> Транспортной компанией
-                    </div>
-                  </div>
+                <CardContent>
+                  <p className="text-gray-600">Бесплатная доставка при заказе от 50 000 руб. В остальных случаях стоимость рассчитывается индивидуально</p>
                 </CardContent>
               </Card>
               <Card className="hover:shadow-lg transition-shadow">
                 <CardHeader>
-                  <Icon name="Wrench" size={32} className="text-primary mb-2" />
-                  <CardTitle>Установка</CardTitle>
+                  <Icon name="Truck" size={32} className="text-primary mb-2" />
+                  <CardTitle>Доставка по Мордовии</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600">Осуществляем доставку по всей Республике Мордовия. Стоимость зависит от расстояния и объема груза</p>
+                </CardContent>
+              </Card>
+              <Card className="hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <Icon name="Store" size={32} className="text-primary mb-2" />
+                  <CardTitle>Самовывоз</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600">Забрать товар можно самостоятельно по адресу: г. Саранск, ул. Рабочая 95а</p>
+                </CardContent>
+              </Card>
+            </div>
+            <div className="grid md:grid-cols-2 gap-8 mb-12">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Условия доставки</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div>
+                    <strong className="text-primary">Сроки доставки</strong>
+                    <p className="text-gray-600 mt-1">По Саранску — 1-2 рабочих дня. По Мордовии — 2-5 рабочих дней</p>
+                  </div>
+                  <div>
+                    <strong className="text-primary">Разгрузка</strong>
+                    <p className="text-gray-600 mt-1">Водитель помогает с разгрузкой на уровне кузова. Занос на участок оплачивается отдельно</p>
+                  </div>
+                  <div>
+                    <strong className="text-primary">Консультация по монтажу</strong>
+                    <p className="text-gray-600 mt-1">Наши специалисты дадут рекомендации по установке теплицы при доставке</p>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                  <CardTitle>Способы оплаты</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex items-start gap-2">
-                    <Icon name="Check" size={20} className="text-primary mt-0.5" />
+                    <Icon name="Banknote" size={20} className="text-primary mt-0.5" />
                     <div>
-                      <strong>Монтаж:</strong> От 5000 ₽
+                      <strong>Наличными</strong>
+                      <p className="text-gray-600 text-sm">Оплата наличными при получении товара или в нашем офисе</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-2">
-                    <Icon name="Check" size={20} className="text-primary mt-0.5" />
+                    <Icon name="Building" size={20} className="text-primary mt-0.5" />
                     <div>
-                      <strong>Срок:</strong> 1-3 дня
+                      <strong>Банковский перевод</strong>
+                      <p className="text-gray-600 text-sm">Безналичная оплата для юридических лиц и ИП</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-2">
-                    <Icon name="Check" size={20} className="text-primary mt-0.5" />
+                    <Icon name="CreditCard" size={20} className="text-primary mt-0.5" />
                     <div>
-                      <strong>Гарантия:</strong> На работы 2 года
+                      <strong>Картой</strong>
+                      <p className="text-gray-600 text-sm">Оплата банковской картой в офисе или при доставке</p>
                     </div>
                   </div>
                 </CardContent>
@@ -478,22 +474,22 @@ const Index = () => {
                   <div className="flex items-center gap-3">
                     <Icon name="Phone" className="text-primary" />
                     <div>
-                      <div className="font-semibold">+7 (495) 123-45-67</div>
-                      <div className="text-sm text-gray-600">Ежедневно 9:00 - 21:00</div>
+                      <div className="font-semibold">+7 (937) 672-20-82</div>
+                      <div className="text-sm text-gray-600">Пн-Пт: 9:00 - 17:00, Сб: 9:00 - 14:00</div>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <Icon name="Mail" className="text-primary" />
                     <div>
-                      <div className="font-semibold">info@teplica.pro</div>
+                      <div className="font-semibold">Ooo.tri@inbox.ru</div>
                       <div className="text-sm text-gray-600">Ответим в течение часа</div>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <Icon name="MapPin" className="text-primary" />
                     <div>
-                      <div className="font-semibold">Москва, ул. Садовая, 15</div>
-                      <div className="text-sm text-gray-600">Пн-Вс 9:00 - 18:00</div>
+                      <div className="font-semibold">Саранск, ул. Рабочая, 95а</div>
+                      <div className="text-sm text-gray-600">Пн-Пт: 9:00-17:00, Сб: 9:00-14:00</div>
                     </div>
                   </div>
                 </CardContent>
@@ -533,20 +529,25 @@ const Index = () => {
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <Icon name="Sprout" className="text-primary" size={28} />
-                <h4 className="text-xl font-bold">ТеплицаПро</h4>
+                <img 
+                  src="https://cdn.poehali.dev/projects/7f2b7179-9fec-4144-acd7-b01c04fb874c/files/c2ffd321-78cb-4843-a8b7-4daf2109ebee.jpg" 
+                  alt="Логотип" 
+                  className="h-8 w-8 object-contain"
+                />
+                <h4 className="text-xl font-bold">Поликарбонат&теплицы</h4>
               </div>
               <p className="text-gray-400">
-                Качественные теплицы для вашего урожая
+                Магазин в Саранске. Более 10 лет на рынке Мордовии
               </p>
             </div>
             <div>
               <h5 className="font-semibold mb-4">Каталог</h5>
               <ul className="space-y-2 text-gray-400">
-                <li>Теплицы из поликарбоната</li>
-                <li>Арочные теплицы</li>
-                <li>Теплицы-домики</li>
-                <li>Аксессуары</li>
+                <li>Теплицы Урожайная</li>
+                <li>Теплицы Волжанка</li>
+                <li>Теплицы Стрелка</li>
+                <li>Кремлёвская Сказка</li>
+                <li>Поликарбонат и комплектующие</li>
               </ul>
             </div>
             <div>
@@ -568,7 +569,7 @@ const Index = () => {
             </div>
           </div>
           <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
-            <p>© 2024 ТеплицаПро. Все права защищены.</p>
+            <p>© 2024 Поликарбонат&теплицы, Саранск. Все права защищены.</p>
           </div>
         </div>
       </footer>
